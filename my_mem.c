@@ -30,7 +30,7 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     pool = my_memory;                                    /* holds the pointer to the array from mem size */
     pool_size = my_mem_size;
     if (pool != NULL) {
-        /* if we got a valid pool(array) */
+        /* if we got a valid pool(array/linkedlist) */
         block_header_ptr first = (block_header_ptr)pool;
         first->size = my_mem_size;                       /* take the structure's size and set the block to full size */
         first->status = FREE_BLOCK;                      /* take the structure's status and set the block to free */ 
