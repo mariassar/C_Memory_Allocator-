@@ -39,7 +39,7 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
 
 void *my_malloc(unsigned size) {
     unsigned char* temp=pool;                            /* get to the beginning of the memory pool */
-    unsigned int needSize = size + sizeof(block_header); /* look for the size needed*/
+    unsigned int needSize = size + sizeof(block_header); /* look for the size needed meaning the header plus the size of the block given by main */
     block_header_ptr b = (block_header_ptr)temp;         /* set on the first header ad the beginning of the pool */
     while (temp - pool < pool_size) {                    /* temp pointer should not run beyond the pool size */
         if (b->status == FREE_BLOCK && b->size >= needSize) {
