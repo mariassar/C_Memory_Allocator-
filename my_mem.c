@@ -59,7 +59,7 @@ void *my_malloc(unsigned size) {
         split_block->status = FREE_BLOCK;                                   /* mark this new block as free */
         b->size = needSize;                                                 /* update the size of the allocated block, to set where the new free block begins */
     }
-                                                                            /* if the size of the block is exactly what we need, no need to split, just return it */
+                                                                            /* if the size of the block is exactly how much free scpace is left, no need to split, just return it */
     return temp + sizeof(block_header);                                     /* return  a pointer to the memory after the header */
 }
 void my_free(void *mem_pointer) {
