@@ -80,8 +80,8 @@ void my_free(void *mem_pointer) {
     }
     /* if we locate the memory successfully then the current header should be exatly equal to the need pointer */
     if (cur == need) {                                          /* if we found the block we need */
-        unsigned char* next=cur + b->size;                      /* obtain the pointer to next block */
-        b->status = FREE_BLOCK;                                 /*  mark the block as free */
+        unsigned char* next=cur + b->size;                      /* obtain the pointer to the next block */
+        b->status = FREE_BLOCK;                                 /* mark the block as free */
         if (next - pool < pool_size) {                          /* check if the next block exists  */
             block_header_ptr bnext = (block_header_ptr)next;
             if (bnext->status == FREE_BLOCK) {                  /* if the next block is free, merge it to the current block */
@@ -109,29 +109,29 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
     mem_stats->smallest_block_used=(int)pool_size; 
     
     {
-        unsigned char* temp=pool;                                  /* a pointer to get the pool block by block */
-        while (temp - pool < pool_size) {                          /* while the pointer is within the pool */
-            block_header_ptr b = (block_header_ptr)temp;           /* read the header of the current block */
-            int cleanSize = (int)(b->size - sizeof(block_header)); /* get the block size available to header size */
-            switch (b->status) {                                   /* check the block status */
+        unsigned char* temp=pool;                                    /* a pointer to get the pool block by block */
+        while (temp - pool < pool_size) {                            /* while the pointer is within the pool */
+            block_header_ptr b = (block_header_ptr)temp;             /* set temporary pointer to header of the current block */
+            int cleanSize = (int)(b->size - sizeof(block_header));   /* get block size (size - header) becuase main didnt give us the header */
+            switch (b->status) {                                     /* check the block status */
                 case FREE_BLOCK:
                 /* update free block stats */
-                    mem_stats->num_blocks_free++; 
-                    if (cleanSize > mem_stats->largest_block_free) {
-                        mem_stats->largest_block_free = cleanSize;
+                    mem_stats->num_blocks_free++;                     /* add one to how many blocks are free */
+                    if (cleanSize > mem_stats->largest_block_free) {  /* if the clean size of the block is greater than the largest free block */
+                        mem_stats->largest_block_free = cleanSize;    /* set the largest free block eqaul to the clean size */
                     }
-                    if (cleanSize < mem_stats->smallest_block_free) {
-                        mem_stats->smallest_block_free = cleanSize;
+                    if (cleanSize < mem_stats->smallest_block_free) { /* if the clean size of the block is less than the smallest free block */
+                        mem_stats->smallest_block_free = cleanSize;   /* set the smallest free block eqaul to the clean size */
                     }
                     break;
                 /* update used block stats */
                 case USED_BLOCK:
-                    mem_stats->num_blocks_used++;
-                    if (cleanSize > mem_stats->largest_block_used) {
-                        mem_stats->largest_block_used = cleanSize;
+                    mem_stats->num_blocks_used++;                     /* add one to how many blocks are used */
+                    if (cleanSize > mem_stats->largest_block_used) {  /* if the clean size of the block is greater than the largest used block */
+                        mem_stats->largest_block_used = cleanSize;    /* set the largest used block eqaul to the clean size */
                     }
-                    if (cleanSize < mem_stats->smallest_block_used) {
-                        mem_stats->smallest_block_used = cleanSize;
+                    if (cleanSize < mem_stats->smallest_block_used) { /* if the clean size of the block is less than the smallest used block */
+                        mem_stats->smallest_block_used = cleanSize;   /* set the smallest used block eqaul to the clean size */
                     }
                     break;
                 default:
@@ -139,7 +139,7 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
             }
             temp += b->size;
         }
-        /* finaly set the smallest sizes to 0 if no block was found */
+        /* set the smallest sizes of used and free blocks to 0 if no block was found */
         if (mem_stats->num_blocks_free == 0) {
             mem_stats->smallest_block_free = 0;
         }
@@ -167,30 +167,30 @@ void print_stats(char *prefix) {
 int main()
 {
     unsigned int global_mem_size = 1024 * 1024;
-    /*grabs memory from malloc*/
+    /* grabs memory from malloc */
     unsigned char *global_memory = malloc(global_mem_size);
     
-    /*call mem_int on memory that was just grabbed*/
+    /* call mem_int on memory that was just grabbed */
     mem_init(global_memory, global_mem_size);
-    /*dump initial statstic with prefix of init*/ 
-    /*init tells us which state the prefix is in when being printed*/
+    /* dump initial statstic with prefix of init */ 
+    /* init tells us which state the prefix is in when being printed */
     print_stats("init");
     
-    /*allocations of blocks*/
+    /* allocations of blocks */
     unsigned char *ptr_array[10];
     unsigned int sizes[] = {50, 20, 20, 20, 50, 0};
     
     for (int i = 0; sizes[i] != 0; i++) {
         char buf[1024];
-        /*call malloc for all sizes in array*/
-        /*stash pointers that come back*/
+        /* call malloc for all sizes in array */
+        /* stash pointers that come back */
         ptr_array[i] = my_malloc(sizes[i]);
         
         sprintf(buf, "after iteration %d size %d", i, sizes[i]);
-        /*print statistic after every allocation*/
+        /* print statistic after every allocation */
         print_stats(buf);
     }
-    /*free up in random order*/
+    /* free up in random order */
     my_free(ptr_array[1]);  print_stats("after free #1");
     my_free(ptr_array[3]);  print_stats("after free #3");
     my_free(ptr_array[2]);  print_stats("after free #2");
