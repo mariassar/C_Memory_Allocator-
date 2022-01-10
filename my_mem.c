@@ -43,7 +43,7 @@ void *my_malloc(unsigned size) {
     block_header_ptr b = (block_header_ptr)temp;         /* set on the first header at the beginning of the pool */
     while (temp - pool < pool_size) {                    /* temp pointer should not run beyond the pool size */
         if (b->status == FREE_BLOCK && b->size >= needSize) {
-            break;                                       /* break as soon as the free block of the necessary size found "first fit strategy " */
+            break;                                       /* break as soon as a free block of the necessary size found "first fit strategy " */
         }
         temp += b->size;                                 /* increment temp pointer by the block size, this should land it to the next block header */
         b = (block_header_ptr)temp;
