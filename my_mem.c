@@ -73,12 +73,12 @@ void my_free(void *mem_pointer) {
 
     /* try to locate the needed pointer in the chain of memory blocks */
     /* start from the first block (pool poitner) and increment by the block size */
-    /* until the needed pointer is found or we run beyond the memory pool */
-    while (cur - pool < pool_size && cur < need) {
-        prev = cur;                                             /* keep the pointer(prev) to the previous block(cur) */
-        cur += b->size;                                         /* increment to the next block */
-        b = (block_header_ptr)cur;                              /* obtain a pointer to the block header */
+    while (cur - pool < pool_size && cur < need) {              /* loop until we run beyond the memory pool or the needed pointer is found */
+        prev = cur;                                             /* set the pointer(prev) to the previous block(cur) */
+        cur += b->size;                                         /* increment the current header to the next block */
+        b = (block_header_ptr)cur;                              /* create a pointer to the block header */
     }
+    /* if we locate the memory successfully then the current header should be exatly equal to the need pointer */
     if (cur == need) {                                          /* if we found the block we need */
         unsigned char* next=cur + b->size;                      /* obtain the pointer to next block */
         b->status = FREE_BLOCK;                                 /*  mark the block as free */
