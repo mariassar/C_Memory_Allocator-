@@ -60,12 +60,12 @@ void *my_malloc(unsigned size) {
         b->size = needSize;                                                 /* update the size of the allocated block, to set where the new free block begins */
     }
                                                                             /* if the size of the block is exactly how much free scpace is left, no need to split, just return it */
-    return temp + sizeof(block_header);                                     /* return  a pointer to the memory after the header */
+    return temp + sizeof(block_header);                                     /* return a pointer to the memory after the header */
 }
 void my_free(void *mem_pointer) {
     /* variables to walk through the memory headers */
-    unsigned char* prev=NULL;                                                  /*  previous header */
-    unsigned char* cur=pool;                                                   /* current header */
+    unsigned char* prev=NULL;                                   /* previous header */
+    unsigned char* cur=pool;                                    /* current header */
 
     /*  a pointer is passed to the memory inside the block, minus the  header size to get the pointer to the header */
     unsigned char* need = ((unsigned char*)mem_pointer) - sizeof(block_header);
