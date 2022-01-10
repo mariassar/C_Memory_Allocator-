@@ -37,6 +37,7 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     }
 }
 
+/* function to allocate memory */
 void *my_malloc(unsigned size) {
     unsigned char* temp=pool;                            /* get to the beginning of the memory pool */
     unsigned int needSize = size + sizeof(block_header); /* look for the size needed meaning the header plus the size of the block given by main */
@@ -62,6 +63,8 @@ void *my_malloc(unsigned size) {
                                                                             /* if the size of the block is exactly how much free scpace is left, no need to split, just return it */
     return temp + sizeof(block_header);                                     /* return a pointer to the memory after the header */
 }
+
+/* function to free memory */
 void my_free(void *mem_pointer) {
     /* variables to walk through the memory headers */
     unsigned char* prev=NULL;                                   /* previous header */
@@ -98,6 +101,7 @@ void my_free(void *mem_pointer) {
         
     }
 }
+
 /* the function goes through every memory block and collects the stats */
 void mem_get_stats(mem_stats_ptr mem_stats) {
     /* setup the variables before collecting stats */
@@ -149,9 +153,10 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
     }
 }
 
+ /* function to print stats collected */
 void print_stats(char *prefix) {
     mem_stats_struct mem_stats;
-    
+    /* calls function to get stats to be printed */
     mem_get_stats(&mem_stats);
     printf("mem stats: %s: %d free blocks, %d used blocks, free blocks: smallest=%d largest=%d, used blocks: smallest=%d largest=%d\n",
            prefix,
