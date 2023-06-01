@@ -16,7 +16,6 @@ To free, identify the block, and mark as free. Next the code finds the next bloc
 
 The make file prints the output to mem.
 
-
 $ make && ./mem
 mem.pdf = To get the final graph: I created two dictionaries to put the x and y coordinates in. I used matplotlib to create a scatterplot figure of these points that later creates a pdf called graph.pdf.
 
@@ -24,6 +23,7 @@ testfile = he make file prints this datato the file called zip.
 
 Sucsessful output and testing:
 
+PResentation
 The Best Case performance for malloc and free is O(1) if the the block is at the beginning of the list.
 Either malloc quickly finds the free block of the correct size, or free deallocates the block at the beginning of the chain of blocks.
 The Worst Case the functions have to go through the entire linked list of blocks and the performance is O(n), where n is the number of free or used blocks in the chain.
