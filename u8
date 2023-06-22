@@ -1,6 +1,7 @@
 #include <assert.h>
 
 int main() {
+
     unsigned int global_mem_size = 1024 * 1024;
     unsigned char *global_memory = malloc(global_mem_size);
     
@@ -34,6 +35,48 @@ int main() {
         ptr_array[i] = (unsigned char *)my_malloc(sizes[i]);
         assert(ptr_array[i] != NULL);
     }
+    // Test Case 3: Allocate and deallocate large blocks
+    unsigned char *ptr4 = (unsigned char *)my_malloc(800000);
+    unsigned char *ptr5 = (unsigned char *)my_malloc(500000);
+    
+    assert(ptr4 != NULL);
+    assert(ptr5 != NULL);
+    
+    print_stats("After large allocations");
+    
+    my_free(ptr4);
+    print_stats("After large deallocation");
+
+    my_free(ptr5);
+    print_stats("After all deallocations");
+
+    // Test Case 4: Allocate and deallocate multiple blocks with splitting
+    unsigned char *ptr6 = (unsigned char *)my_malloc(200);
+    unsigned char *ptr7 = (unsigned char *)my_malloc(400);
+    unsigned char *ptr8 = (unsigned char *)my_malloc(600);
+    
+    assert(ptr6 != NULL);
+    assert(ptr7 != NULL);
+    assert(ptr8 != NULL);
+    
+    print_stats("After allocation with splitting");
+    
+    my_free(ptr7);
+    print_stats("After deallocation with splitting");
+
+    my_free(ptr6);
+    my_free(ptr8);
+    
+    print_stats("After all deallocations");
+
+    // Test Case 5: Allocate maximum-sized block
+    unsigned char *ptr9 = (unsigned char *)my_malloc(pool_size - sizeof(block_header));
+    assert(ptr9 != NULL);
+
+    print_stats("After maximum allocation");
+
+    my_free(ptr9);
+    print_stats("After deallocation of maximum block");
     
     print_stats("After random allocations");
     
@@ -47,4 +90,6 @@ int main() {
     
     free(global_memory);
     return 0;
+
+
 }
