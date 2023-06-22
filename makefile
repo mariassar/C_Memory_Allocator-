@@ -10,3 +10,6 @@ tests: tests.c
 	./tests
 clean:
 	rm mem tests
+
+#make mem - Compiles the my_mem.c file into an executable called "mem"
+#make tests  - Compiles the tests.c file into an executable called "tests" and runs the test cases
