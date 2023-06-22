@@ -1,0 +1,50 @@
+#include <assert.h>
+
+int main() {
+    unsigned int global_mem_size = 1024 * 1024;
+    unsigned char *global_memory = malloc(global_mem_size);
+    
+    mem_init(global_memory, global_mem_size);
+    print_stats("Init");
+    
+    // Test Case 1: Allocate and deallocate multiple blocks
+    unsigned char *ptr1 = (unsigned char *)my_malloc(100);
+    unsigned char *ptr2 = (unsigned char *)my_malloc(200);
+    unsigned char *ptr3 = (unsigned char *)my_malloc(300);
+    
+    assert(ptr1 != NULL);
+    assert(ptr2 != NULL);
+    assert(ptr3 != NULL);
+    
+    print_stats("After allocation");
+    
+    my_free(ptr2);
+    print_stats("After deallocation");
+    
+    my_free(ptr1);
+    my_free(ptr3);
+    
+    print_stats("After all deallocations");
+    
+    // Test Case 2: Allocate and deallocate in random order
+    unsigned char *ptr_array[5];
+    unsigned int sizes[] = {50, 20, 30, 40, 60};
+    
+    for (int i = 0; i < 5; i++) {
+        ptr_array[i] = (unsigned char *)my_malloc(sizes[i]);
+        assert(ptr_array[i] != NULL);
+    }
+    
+    print_stats("After random allocations");
+    
+    my_free(ptr_array[1]);
+    my_free(ptr_array[3]);
+    my_free(ptr_array[0]);
+    my_free(ptr_array[4]);
+    my_free(ptr_array[2]);
+    
+    print_stats("After random deallocations");
+    
+    free(global_memory);
+    return 0;
+}
