@@ -94,27 +94,3 @@ int main() {
 
 }
 
-#Test allocating the maximum available memory:
-
-#Allocate the entire memory pool using my_malloc() (e.g., my_malloc(pool_size - sizeof(block_header))).
-#Verify that the allocation is successful and that the memory stats reflect the entire pool being used.
-#Test allocating more memory than available:
-
-#Allocate memory that exceeds the size of the memory pool using my_malloc().
-#Verify that the allocation fails (returns NULL) and that the memory stats remain unchanged.
-#Test freeing and reusing memory blocks:
-
-#Allocate a memory block using my_malloc() and store the returned pointer.
-#Free the memory block using my_free().
-#Allocate another memory block with the same size using my_malloc().
-#Verify that the second allocation is successful and that the memory stats reflect the correct block status and sizes.
-#Test allocating and freeing multiple blocks in different orders:
-
-#Allocate several memory blocks using my_malloc() and store the returned pointers.
-#Free the memory blocks in different orders using my_free().
-#Verify that the memory stats are correctly updated after each allocation and deallocation.
-#Test edge cases with small memory sizes:
-
-#Set a small memory pool size (e.g., 32 bytes) using mem_init().
-#Allocate and free memory blocks of various sizes using my_malloc() and my_free().
-#Verify that the memory stats accurately reflect the available memory and block sizes.
