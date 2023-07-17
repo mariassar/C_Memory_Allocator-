@@ -169,7 +169,7 @@ void print_stats(char *prefix) {
 
 }
 
-int main()
+int main(int argc, char **argv)
 {
     unsigned int global_mem_size = 1024 * 1024;
     /* grabs memory from malloc */
@@ -183,7 +183,7 @@ int main()
     
     /* allocations of blocks */
     unsigned char *ptr_array[10];
-    unsigned int sizes[] = {50, 20, 20, 20, 50, 0};
+    unsigned int sizes[] = {50+argc, 20+argc, 20+argc, 20+argc, 50+argc, 0+argc};
     
     for (int i = 0; sizes[i] != 0; i++) {
         char buf[1024];
