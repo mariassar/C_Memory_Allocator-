@@ -198,7 +198,7 @@ int main(int argc, char **argv)
         int i = 0;
         for (i = 0; argv[1][i] != '\0'; i++) {
             char number = argv[1][i];
-            /*convert into integers, char* into int and put each argument into the array sizes*/
+            /*convert into integers, char* into int, and put each argument into the array sizes*/
                   sizes[i] = atoi(number)    
         }
     } else {
