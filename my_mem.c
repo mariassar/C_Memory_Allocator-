@@ -171,20 +171,53 @@ void print_stats(char *prefix) {
 
 int main(int argc, char **argv)
 {
+    
     unsigned int global_mem_size = 1024 * 1024;
     /* grabs memory from malloc */
     unsigned char *global_memory = malloc(global_mem_size);
     
     /* call mem_int on memory that was just grabbed */
     mem_init(global_memory, global_mem_size);
-    /* dump initial statstic with prefix of init */ 
+    /* dump initial statistic with a prefix of init */ 
     /* init tells us which state the prefix is in when being printed */
     print_stats("init");
     
     /* allocations of blocks */
     unsigned char *ptr_array[10];
-    unsigned int sizes[] = {50+argc, 20+argc, 20+argc, 20+argc, 50+argc, 0+argc};
+    unsigned int *sizes;
     
+    /*command line arguments list*/
+    if (argc < 2) {
+        printf("ERROR: You need at least one argument.\n");
+        return 1;
+    }
+
+    if (argc == 2) {
+        /*creates an array of the size of the amount of arguments you provide to it*/
+        sizes = (int *) malloc(sizeof(int)* argc);
+        int i = 0;
+        for (i = 0; argv[1][i] != '\0'; i++) {
+            char number = argv[1][i];
+            /*convert into integers, char* into int and put each argument into the array sizes*/
+                  sizes[i] = number.atoi()
+            
+
+            
+        }
+    } else {
+        int i = 0;
+        int t = 2;
+        for (t = 2; argv[t] != '\0'; t++) {
+            for (i = 0; argv[t][i] != '\0'; i++) {
+                char number = argv[t][i];
+                sizes[i] = number.atoi()
+            }
+
+        }
+
+        return 0;
+    }
+   
     for (int i = 0; sizes[i] != 0; i++) {
         char buf[1024];
         /* call malloc for all sizes in array */
