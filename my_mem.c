@@ -193,24 +193,22 @@ int main(int argc, char **argv)
     }
 
     if (argc == 2) {
-        /*creates an array of the size of the amount of arguments you provide to it*/
+        /*creates an array of the size of the number of arguments you provide to it*/
         sizes = (int *) malloc(sizeof(int)* argc);
         int i = 0;
         for (i = 0; argv[1][i] != '\0'; i++) {
             char number = argv[1][i];
             /*convert into integers, char* into int and put each argument into the array sizes*/
-                  sizes[i] = number.atoi()
-            
-
-            
+                  sizes[i] = atoi(number)    
         }
     } else {
         int i = 0;
         int t = 2;
+        sizes = (int *) malloc(sizeof(int)* argc);
         for (t = 2; argv[t] != '\0'; t++) {
             for (i = 0; argv[t][i] != '\0'; i++) {
                 char number = argv[t][i];
-                sizes[i] = number.atoi()
+                sizes[i] = atoi(number)  
             }
 
         }
