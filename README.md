@@ -10,7 +10,7 @@ To collect information about the memory, the code goes through the chain of the 
 
 To allocate memory, the function finds the first free block of sufficient size and splits it into two blocks: occupied and the remaining free. If the size is not big enough for the block, with an additional header for the new second block, then the first memory block is marked as occupied without splitting. $malloc()$
 
-To free memory, the function identifies the first memory block in the list and marks it as free. Then the code finds the next block in the linked list, and if it's free, the program merges both blocks by extending the size of the current freed block. Going from the start of the chain, the code locates the previous block, and if it is free, the program extends it as well. 
+To free memory, the function identifies the first memory block in the list and marks it as free. Then the code finds the next block in the linked list, and if it's free, the program merges both blocks by extending the size of the current freed block. Going from the start of the chain, the code locates the previous block, and if it is free, the program extends it as well. $free()$
 
 mem = 
 To run the file, download the repo, and in the command prompt, run: $ make && ./mem
