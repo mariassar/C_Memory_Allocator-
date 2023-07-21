@@ -1,5 +1,3 @@
-$ make && ./mem
-make: 'mem' is up to date.
 mem stats: init: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
 mem stats: after iteration 0 size 50: 1 free blocks, 1 used blocks, free blocks: smallest=1048510 largest=1048510, used blocks: smallest=50 largest=50
 mem stats: after iteration 1 size 20: 1 free blocks, 2 used blocks, free blocks: smallest=1048482 largest=1048482, used blocks: smallest=20 largest=50
