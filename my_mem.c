@@ -1,26 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-/* constants for block status */
+
+/* macros for block status */
 #define FREE_BLOCK 0
 #define USED_BLOCK 1
 
-/* memory block header with block size in bytes (including header) and status, free or used */
+/* the structure that reports the memory block header size and status in bytes */
 typedef struct {
-    unsigned int size, status;
-} block_header, *block_header_ptr;
+    unsigned int size, status;                            
+} block_header, *block_header_ptr;                        /* create two new names for the struct type */
 
-/* the structure to report memory stats */
+/* the structure to report if memory stats are free or used */
 typedef struct  {
     int num_blocks_used;
     int num_blocks_free;
     int smallest_block_free;
     int smallest_block_used;
     int largest_block_free;
-    int largest_block_used;
-} mem_stats_struct, *mem_stats_ptr;
+    int largest_block_used;                                                        
+} mem_stats_struct, *mem_stats_ptr;                       /* create two new names for the struct type */
 
-/* a pointer to the memory pool and its size */
-/* these are setup by mem_init function */
+/* a pointer to the memory pool and its size and setup by mem_init function */*/
 unsigned char * pool = NULL;
 unsigned int pool_size = 0;
 
@@ -30,7 +30,7 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     pool = my_memory;                                    /* holds the pointer to the array from mem size */
     pool_size = my_mem_size;
     if (pool != NULL) {
-        /* if we got a valid pool(array/linkedlist) */
+        /* if we got a valid pool(array/linked list) */
         block_header_ptr first = (block_header_ptr)pool;
         first->size = my_mem_size;                       /* take the structure's size and set the block to full size */
         first->status = FREE_BLOCK;                      /* take the structure's status and set the block to free */ 
@@ -197,9 +197,9 @@ int main(int argc, char **argv)
         sizes = (int *) malloc(sizeof(int)* argc);
         int i = 0;
         for (i = 0; argv[1][i] != '\0'; i++) {
-            char number = argv[1][i];
+            char* number = argv[1][i];
             /*convert into integers, char* into int, and put each argument into the array sizes*/
-                  sizes[i] = atoi(number)    
+            sizes[i] = atoi(number)    
         }
     } else {
         int i = 0;
@@ -207,7 +207,7 @@ int main(int argc, char **argv)
         sizes = (int *) malloc(sizeof(int)* argc);
         for (t = 2; argv[t] != '\0'; t++) {
             for (i = 0; argv[t][i] != '\0'; i++) {
-                char number = argv[t][i];
+                char* number = argv[t][i];
                 sizes[i] = atoi(number)  
             }
 
