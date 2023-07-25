@@ -1,5 +1,6 @@
 mem: my_mem.c
 	gcc my_mem.c -o mem
+	./mem > mem.txt
 clean:
 	rm mem 
 
