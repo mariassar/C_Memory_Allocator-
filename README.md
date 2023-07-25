@@ -6,7 +6,7 @@ To accomplish the goal, the allocator needed two main functions: malloc() and fr
 my_mem.c =
 The strategy for allocation within the file called 'my_mem.c' was "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the size is not less than the required size, then it is allocated. The program is brought to life using the following functions, $mem_init()$, $my_malloc()$, $my_free()$, $mem_get_stats()$, $print_stats()$, and $main$.
 
-$mem_init() Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space malloc() into blocks with headers.
+#mem_init()# Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space malloc() into blocks with headers.
 
 $my_malloc() Functions equivalent to malloc, but allocates memory from the initialized memory pool. This function searches for a free memory block of the required size in the memory pool (using a "first fit" strategy). If found, it allocates the block and returns a pointer to the memory region after the block header. If the block is larger than the requested size, it splits the block into two parts, one for the allocation and the other for the remaining free space.
 
