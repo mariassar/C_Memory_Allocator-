@@ -4,7 +4,7 @@ My goal was to make a basic but functional implementation of a memory allocator 
 To accomplish the goal, the allocator needed two main functions: malloc() and free(). The data structure supporting the allocator is a linked list of memory block headers. This  data structure would allow me to optimally organize memory space into several parts that can be used and reused. The makeFile compiles the c program into the file called 'mem' containing the output of the memory allocation simulating program.
 
 my_mem.c =
-The strategy for allocation within the file called 'my_mem.c' was "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the size is not less than the required size, then it is allocated. The program is brought to life using the following functions, $mem_init()$, $my_malloc()$, $my_free()$, $mem_get_stats()$, $print_stats()$, and $main$.
+The strategy for allocation within the file called 'my_mem.c' was "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the size is not less than the required size, then it is allocated. The program is brought to life using the following functions, >mem_init(), $my_malloc()$, $my_free()$, $mem_get_stats()$, $print_stats()$, and $main$.
 
 #mem_init()# Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space malloc() into blocks with headers.
 
