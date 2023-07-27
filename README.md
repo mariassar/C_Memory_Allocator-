@@ -21,7 +21,7 @@ The strategy for allocation within the file called 'my_mem.c' was "first fit," m
 makefile = 
 To run the file, download the repo, and in the command prompt, run: `$ make`
 The make file prints the output of the allocated memory simulator to mem and then outputs to the file called mem.txt.
-To view the contents of the file type the command `$ cat mem.txt'.
+To view the contents of the file type the command `$ cat mem.txt.`
 
 The Best Case performance for malloc and free is O(1) if the block is at the beginning of the list. Either the malloc function quickly finds the free block of the correct size or free deallocates the block at the beginning of the chain of blocks.
 In the Worst Case, the functions have to go through the entire linked list of blocks, and the performance is O(n), where n is the number of free or used blocks in the chain.
