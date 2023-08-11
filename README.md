@@ -15,8 +15,8 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 - `my_mem.h`: This header file defines the prototypes of the functions and structures used in my_mem.c. It's included by       both my_mem.c and test_cases.c.
 - `test_cases.c`: Contains test cases to ensure the allocator's functionality and reliability.
 - `test_cases.h`: This header file defines the prototypes of the test case functions used in test_cases.c. It's included by    test_cases.c.
-- `main.c`: This file includes the main function where the main program statistics are printed as well as the functionality 
-   program statistics are printed. The individual test functions are defined in test_cases.c. 
+- `main.c`: This file includes the main function where the main program statistics as well as the functionality program statistics are 
+   printed. The individual test functions are defined in test_cases.c. 
 
 ### Functionality
 `mem_init()` Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space `malloc()` into blocks with headers.
@@ -34,7 +34,7 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 1. Clone the repository to your local machine.
 2. Open a terminal/command prompt.
 3. Navigate to the project directory.
-4. Run the following command to build and run the allocator:
+4. Run the following command to build, run, and output the allocator:
 
    ```sh
    make all
