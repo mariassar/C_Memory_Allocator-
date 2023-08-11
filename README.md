@@ -4,7 +4,9 @@ My goal was to make a basic but functional implementation of a memory allocator 
 To accomplish the goal, the allocator needed two main functions: `malloc(`) and `free()`. The data structure supporting the allocator is a linked list of memory block headers. This  data structure would allow me to optimally organize memory space into several parts that can be used and reused. 
 
 my_mem.c =
-The strategy for allocation within the file called 'my_mem.c' was "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the size is not less than the required size, then it is allocated. The program is brought to life using the following functions, `mem_init()`, `my_malloc()`, `my_free()`, `mem_get_stats()`, `print_stats()`, and `main()`.
+The strategy for allocation within the file called 'my_mem.c' was "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the available (free) block size (within the global memory pool) is greater than or equal to the required size, then it is allocated. The program is brought to life using the following functions, `mem_init()`, `my_malloc()`, `my_free()`, `mem_get_stats()`, `print_stats()`, and `main()`.
+
+`main()` Demonstrates the memory management system. This function first initializes a global memory pool with a size of 1 MB. It then calls mem_init to initialize the memory pool with the global memory. Next, it allocates memory using `my_malloc()` in a loop and stores the pointers in the `ptr_array` array, and prints memory statistics after each allocation using `print_stats()`. Lastly, it frees memory in a random order using my_free and prints statistics after each deallocation.
 
 `mem_init()` Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space `malloc()` into blocks with headers.
 
@@ -15,8 +17,6 @@ The strategy for allocation within the file called 'my_mem.c' was "first fit," m
 `mem_get_stats()` Collects statistics about the current memory allocation in the memory pool. This function traverses all memory blocks and calculates the number of free and used blocks. It also determines the sizes of the smallest and largest free/used blocks. Additionally, it updates the provided `mem_stats_ptr` structure with the collected statistics.
 
 `print_stats()` Prints the statistics collected by mem_get_stats. This function calls `mem_get_stats()` to obtain the memory statistics and then prints the statistics with a provided prefix for identification.
-
-`main()` Demonstrates the memory management system. This function first initializes a global memory pool with a size of 1 MB. It then calls mem_init to initialize the memory pool with the global memory. Next, it allocates memory using `my_malloc()` in a loop and stores the pointers in the `ptr_array` array, and prints memory statistics after each allocation using `print_stats()`. Lastly, it frees memory in a random order using my_free and prints statistics after each deallocation.
 
 makefile = 
 To run the file, download the repo, and in the command prompt, run: `$ make`
