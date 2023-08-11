@@ -3,7 +3,7 @@
 
 The purpose of this project is to implement a basic yet functional memory allocator in the C programming language. The standard C programming environment includes a memory allocator accessed via `malloc()` and `free()` functions.
 
-## Implementation Details
+### Implementation Details
 
 The core allocator implementation is based on two main functions: `my_malloc()` for memory allocation and `my_free()` for memory deallocation. The allocator utilizes a linked list of memory block headers to efficiently organize memory space into parts that can be allocated and reused.
 
@@ -29,7 +29,7 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 
 `print_stats()` Prints the statistics collected by mem_get_stats. This function calls `mem_get_stats()` to obtain the memory statistics and then prints the statistics with a provided prefix for identification.
 
-## Usage
+### Usage
 
 1. Clone the repository to your local machine.
 2. Open a terminal/command prompt.
@@ -40,9 +40,10 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
    make all
 5. To view the contents of the file type the command:
    
-   ``` $ cat mem.txt
+   ``` sh
+   cat mem.txt
 
-## Performance
+### Performance
 The Best Case performance for malloc and free is O(1) if the block is at the beginning of the list. Either the malloc function quickly finds the free block of the correct size or free deallocates the block at the beginning of the chain of blocks.
 In the Worst Case, the functions have to go through the entire linked list of blocks, and the performance is O(n), where n is the number of free or used blocks in the chain.
 The Average Case performance would depend on the requests for malloc and free from the main function, but in general, the average should be O(n/2).
