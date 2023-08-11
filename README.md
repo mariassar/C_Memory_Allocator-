@@ -1,13 +1,24 @@
 # C Memory Allocator
-My goal was to make a basic but functional implementation of a memory allocator in the C programming Language. The standard C programming environment includes an elaborate memory allocator accessed via `malloc()` and `free()`.
+## Introduction
 
-To accomplish the goal, the allocator needed two main functions: `malloc(`) and `free()`. The data structure supporting the allocator is a linked list of memory block headers. This  data structure would allow me to optimally organize memory space into several parts that can be used and reused. 
+The purpose of this project is to implement a basic yet functional memory allocator in the C programming language. The standard C programming environment includes a memory allocator accessed via `malloc()` and `free()` functions.
 
-my_mem.c =
-The strategy for allocation within the file called 'my_mem.c' was "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the available (free) block size (within the global memory pool) is greater than or equal to the required size, then it is allocated. The program is brought to life using the following functions, `mem_init()`, `my_malloc()`, `my_free()`, `mem_get_stats()`, `print_stats()`, and `main()`.
+## Implementation Details
 
-`main()` Demonstrates the memory management system. This function first initializes a global memory pool with a size of 1 MB. It then calls mem_init to initialize the memory pool with the global memory. Next, it allocates memory using `my_malloc()` in a loop and stores the pointers in the `ptr_array` array, and prints memory statistics after each allocation using `print_stats()`. Lastly, it frees memory in a random order using my_free and prints statistics after each deallocation.
+The core allocator implementation is based on two main functions: `my_malloc()` for memory allocation and `my_free()` for memory deallocation. The allocator utilizes a linked list of memory block headers to efficiently organize memory space into parts that can be allocated and reused.
 
+### Files
+
+- `my_mem.c`: The strategy for allocation within the file is "first fit," meaning the first block of sufficient size that      is available is taken in a sequential manner. If the available (free) block size (within the global 
+   memory pool) is greater than or equal to the required size, then it is allocated. The program is brought to life using 
+   the following functions, `mem_init()`, `my_malloc()`, `my_free()`, `mem_get_stats()`, `print_stats()`.
+- `my_mem.h`: This header file defines the prototypes of the functions and structures used in my_mem.c. It's included by       both my_mem.c and test_cases.c.
+- `test_cases.c`: Contains test cases to ensure the allocator's functionality and reliability.
+- `test_cases.h`: This header file defines the prototypes of the test case functions used in test_cases.c. It's included by    test_cases.c.
+- `main.c`: This file includes the main function where the main program statistics are printed as well as the functionality 
+   program statistics are printed. The individual test functions are defined in test_cases.c. 
+
+### Functionality
 `mem_init()` Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space `malloc()` into blocks with headers.
 
 `my_malloc()` Functions equivalent to `malloc()`, but allocates memory from the initialized memory pool. This function searches for a free memory block of the required size in the memory pool (using a "first fit" strategy). If found, it allocates the block and returns a pointer to the memory region after the block header. If the block is larger than the requested size, it splits the block into two parts, one for the allocation and the other for the remaining free space.
@@ -18,11 +29,20 @@ The strategy for allocation within the file called 'my_mem.c' was "first fit," m
 
 `print_stats()` Prints the statistics collected by mem_get_stats. This function calls `mem_get_stats()` to obtain the memory statistics and then prints the statistics with a provided prefix for identification.
 
-makefile = 
-To run the file, download the repo, and in the command prompt, run: `$ make`
-The make file prints the output of the allocated memory simulator to mem and then outputs to the file called mem.txt.
-To view the contents of the file type the command `$ cat mem.txt.`
+## Usage
 
+1. Clone the repository to your local machine.
+2. Open a terminal/command prompt.
+3. Navigate to the project directory.
+4. Run the following command to build and run the allocator:
+
+   ```sh
+   make all
+5. To view the contents of the file type the command:
+   
+   ``` $ cat mem.txt
+
+## Performance
 The Best Case performance for malloc and free is O(1) if the block is at the beginning of the list. Either the malloc function quickly finds the free block of the correct size or free deallocates the block at the beginning of the chain of blocks.
 In the Worst Case, the functions have to go through the entire linked list of blocks, and the performance is O(n), where n is the number of free or used blocks in the chain.
 The Average Case performance would depend on the requests for malloc and free from the main function, but in general, the average should be O(n/2).
