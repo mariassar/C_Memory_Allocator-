@@ -1,24 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-/* macros for block status */
-#define FREE_BLOCK 0
-#define USED_BLOCK 1
-
-/* alias to the structure data type that reports the memory block header size and status in bytes */
-typedef struct {
-    unsigned int size, status;                            
-} block_header, *block_header_ptr;                                             /* create two new names for the struct type */
-
-/* alias to the structure data type to report if memory stats are free or used */
-typedef struct  {
-    int num_blocks_used;
-    int num_blocks_free;
-    int smallest_block_free;
-    int smallest_block_used;
-    int largest_block_free;
-    int largest_block_used;                                                        
-} mem_stats_struct, *mem_stats_ptr;                                            /* create two new names for the struct type */
+#include <stdio.h>  
+#include "my_mem.h"
 
 /* pointer to the memory pool and its size that is setup by mem_init function */
 unsigned char *pool = NULL;
@@ -32,7 +13,7 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     pool_size = my_mem_size;                                                  /* holds the pointer to the memory pool's size */
     if (pool != NULL) {                                                       /* if we got a valid pool(array/linked list) */
         block_header_ptr first = (block_header_ptr)pool;
-        first->size = my_mem_size;                                            /* take the structure's initial size and set the block to the memory pool's full size */
+        first->size = my_mem_size;                                            /* take the structure's initial size and set the block to memory pool's full size */
         first->status = FREE_BLOCK;                                           /* take the structure's initial status and set the block to free */ 
     }
 }
@@ -60,7 +41,7 @@ void *my_malloc(unsigned size) {
         split_block->status = FREE_BLOCK;                                   /* mark this new block as free */
         b->size = needSize;                                                 /* update the size of the allocated block, to set where the new free block begins */
     }
-                                                                            /* if the size of the block is exactly how much free space is left, no need to split, just return it */
+                                                                            /* if the size of the block is exactly how much free scpace is left, no need to split, just return it */
     return temp + sizeof(block_header);                                     /* return a pointer to the memory after the header */
 }
 
@@ -81,7 +62,7 @@ void my_free(void *mem_pointer) {
         cur += b->size;                                                     /* increment the current header to the next block */
         b = (block_header_ptr)cur;                                          /* create a pointer to the block header */
     }
-    /* if we locate the memory successfully then the current header should be exactly equal to the need pointer */
+    /* if we locate the memory successfully then the current header should be exatly equal to the need pointer */
     if (cur == need) {                                                      /* if we found the block we need */
         unsigned char *next=cur + b->size;                                  /* obtain the pointer to the next block */
         b->status = FREE_BLOCK;                                             /* mark the block as free */
@@ -114,7 +95,7 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
     mem_stats->smallest_block_used = (int)pool_size; 
     
     {
-        unsigned char *temp = pool;                                        /* a pointer to get the pool block by block */
+        unsigned char *temp = pool;                                          /* a pointer to get the pool block by block */
         while (temp - pool < pool_size) {                                  /* while the pointer is within the pool */
             block_header_ptr b = (block_header_ptr)temp;                   /* set temporary pointer to header of the current block */
             int cleanSize = (int)(b->size - sizeof(block_header));         /* get block size (size - header) becuase main didnt give us the header */
@@ -168,41 +149,4 @@ void print_stats(char *prefix) {
            mem_stats.smallest_block_used,
            mem_stats.largest_block_used);
 
-}
-
-int main(int argc, char **argv)
-{
-    unsigned int global_mem_size = 1024 * 1024;
-    /* grabs memory from malloc */
-    unsigned char *global_memory = malloc(global_mem_size);
-    
-    /* call mem_int on memory that was just grabbed */
-    mem_init(global_memory, global_mem_size);
-    
-    /* dump initial statistic with a prefix of init */ 
-    /* init tells us which state the prefix is in when being printed */
-    print_stats("init");
-       
-    unsigned char *ptr_array[10];
-    unsigned int sizes[] = {50, 20, 20, 20, 50, 0};
-
-    for (int i = 0; sizes[i] != 0; i++) {
-        char buf[1024];
-        /* call malloc for all sizes in array */
-        /* stash pointers that come back */
-        ptr_array[i] = my_malloc(sizes[i]);
-        
-        sprintf(buf, "after iteration %d size %d", i, sizes[i]);
-        /* print statistic after every allocation */
-        print_stats(buf);
-    }
-    /* free up in random order */
-    my_free(ptr_array[1]);  print_stats("after free #1");
-    my_free(ptr_array[3]);  print_stats("after free #3");
-    my_free(ptr_array[2]);  print_stats("after free #2");
-    my_free(ptr_array[0]);  print_stats("after free #0");
-    my_free(ptr_array[4]);  print_stats("after free #4");
-    
-    free(global_memory);
-    return 0;
 }
