@@ -5,12 +5,11 @@ The purpose of this project is to implement a basic yet functional memory alloca
 
 ### Implementation Details
 
-The core allocator implementation is based on two main functions: `my_malloc()` for memory allocation and `my_free()` for memory deallocation. The allocator utilizes a linked list of memory block headers to efficiently organize memory space into parts that can be allocated and reused.
+The core allocator implementation is based on two main functions: `my_malloc()` for memory allocation and `my_free()` for memory deallocation. The allocator utilizes a linked list of memory block headers to efficiently organize memory space into parts that can be allocated and reused. The strategy for allocation within the file is "first fit," meaning the first block of sufficient size that is available is taken in a sequential manner. If the available (free) block size (within the global memory pool) is greater than or equal to the required size, then it is allocated. This minimizes the chances of creating small, unusable gaps between allocated blocks that could lead to fragmentation. The strategy for deallocation in the memory allocator marks blocks as available (free) and merges adjacent free blocks. This approach ensures that even if there are small gaps between allocated blocks, those gaps can be minimized over time by merging adjacent free blocks. As a result, the memory allocator can more efficiently allocate larger memory requests and reduce the overall impact of fragmentation.
 
 ### Files
 
-- `my_mem.c`: This file contains the main functionality of the program. The strategy for allocation within the file is "first fit," meaning    the first block of sufficient size that is available is taken in a sequential manner. If the available (free) block size (within the 
-   global memory pool) is greater than or equal to the required size, then it is allocated.
+- `my_mem.c`: This file contains the main functionality of the program. 
 - `my_mem.h`: This header file defines the prototypes of the functions and structures used in my_mem.c. It's included by both my_mem.c and 
    test_cases.c.
 - `test_cases.c`: Contains test cases to ensure the allocator's functionality and reliability.
