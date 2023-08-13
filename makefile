@@ -7,8 +7,8 @@ CFLAGS = -Wall -Wextra
 
 # Default target ('all') that builds the 'main' executable and runs it
 all: main
-	./main
-
+	./main > mem.txt
+	./main 
 # Target to build the 'main' executable, depends on the object files
 main: main.o my_mem.o test_cases.o
 	$(CC) $(CFLAGS) -o $@ $^
