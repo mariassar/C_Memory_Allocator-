@@ -9,14 +9,14 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 
 ### Files
 
-- `my_mem.c`: The strategy for allocation within the file is "first fit," meaning the first block of sufficient size that      is available is taken in a sequential manner. If the available (free) block size (within the global 
-   memory pool) is greater than or equal to the required size, then it is allocated. The program is brought to life using 
-   the following functions, `mem_init()`, `my_malloc()`, `my_free()`, `mem_get_stats()`, `print_stats()`.
-- `my_mem.h`: This header file defines the prototypes of the functions and structures used in my_mem.c. It's included by       both my_mem.c and test_cases.c.
+- `my_mem.c`: This file contains the main functionality of the program. The strategy for allocation within the file is "first fit," meaning    the first block of sufficient size that is available is taken in a sequential manner. If the available (free) block size (within the 
+   global memory pool) is greater than or equal to the required size, then it is allocated.
+- `my_mem.h`: This header file defines the prototypes of the functions and structures used in my_mem.c. It's included by both my_mem.c and 
+   test_cases.c.
 - `test_cases.c`: Contains test cases to ensure the allocator's functionality and reliability.
-- `test_cases.h`: This header file defines the prototypes of the test case functions used in test_cases.c. It's included by    test_cases.c.
+- `test_cases.h`: This header file defines the prototypes of the test case functions used in test_cases.c. It's included by test_cases.c.
 - `main.c`: This file includes the main function where the main program statistics as well as the functionality program statistics are 
-   printed. The individual test functions are defined in test_cases.c. 
+   gathered and printed. The individual test functions are defined in test_cases.c. 
 
 ### Functionality
 `mem_init()` Initializes the memory pool with the provided memory block and saves the pointer to the memory block and its size in global variables. This function also sets the initial block header to represent the entire memory pool as a single free block. The program breaks the bulk space `malloc()` into blocks with headers.
@@ -37,8 +37,8 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 4. Run the following command to build, run, and output the allocator:
 
    ```sh
-   make all
-5. To view the contents of the output file type the command:
+   make 
+5. Run the following command to view the contents of the output file:
    
    ``` sh
    cat mem.txt
