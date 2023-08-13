@@ -45,5 +45,7 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 
 ### Performance
 The Best Case performance for malloc and free is O(1) if the block is at the beginning of the list. Either the malloc function quickly finds the free block of the correct size or free deallocates the block at the beginning of the chain of blocks.
+
 In the Worst Case, the functions have to go through the entire linked list of blocks, and the performance is O(n), where n is the number of free or used blocks in the chain.
+
 The Average Case performance would depend on the requests for malloc and free from the main function, but in general, the average should be O(n/2).
