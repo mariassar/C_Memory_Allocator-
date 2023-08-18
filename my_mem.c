@@ -5,7 +5,7 @@
 unsigned char *pool = NULL;
 unsigned int pool_size = 0;
 
-/* The memory to be managed is passed into this function */
+/* the memory to be managed is passed into this function */
 /* mem_init saves the pointer to memory and initializes the size and status of a given block */
 void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     /* save the provided memory block into global variables */

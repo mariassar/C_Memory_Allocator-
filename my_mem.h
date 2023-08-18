@@ -20,7 +20,7 @@ typedef struct  {
     int largest_block_used;                                                        
 } mem_stats_struct, *mem_stats_ptr;                                            /* create two new names for the struct type */
 
-//main Functionality and Implementation Functions
+/* main functionality and implementation functions */
 void mem_init(unsigned char *my_memory, unsigned int my_mem_size);
 void *my_malloc(unsigned size);
 void my_free(void *mem_pointer);
