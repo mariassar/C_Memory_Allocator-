@@ -1,18 +1,18 @@
-Main Program Statistics:
-mem stats: After initialization: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
-mem stats: After allocation 0 size 50: 1 free blocks, 1 used blocks, free blocks: smallest=1048510 largest=1048510, used blocks: smallest=50 largest=50
-mem stats: After allocation 1 size 20: 1 free blocks, 2 used blocks, free blocks: smallest=1048482 largest=1048482, used blocks: smallest=20 largest=50
-mem stats: After allocation 2 size 20: 1 free blocks, 3 used blocks, free blocks: smallest=1048454 largest=1048454, used blocks: smallest=20 largest=50
-mem stats: After allocation 3 size 20: 1 free blocks, 4 used blocks, free blocks: smallest=1048426 largest=1048426, used blocks: smallest=20 largest=50
-mem stats: After allocation 4 size 50: 1 free blocks, 5 used blocks, free blocks: smallest=1048368 largest=1048368, used blocks: smallest=20 largest=50
-mem stats: After free #1: 2 free blocks, 4 used blocks, free blocks: smallest=20 largest=1048368, used blocks: smallest=20 largest=50
-mem stats: After free #3: 3 free blocks, 3 used blocks, free blocks: smallest=20 largest=1048368, used blocks: smallest=20 largest=50
-mem stats: After free #2: 2 free blocks, 2 used blocks, free blocks: smallest=76 largest=1048368, used blocks: smallest=50 largest=50
-mem stats: After free #0: 2 free blocks, 1 used blocks, free blocks: smallest=134 largest=1048368, used blocks: smallest=50 largest=50
-mem stats: After free #4: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
+Main Sample Program Statistics:
+mem stats: after initialization: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
+mem stats: after allocation: 0 size 50: 1 free blocks, 1 used blocks, free blocks: smallest=1048510 largest=1048510, used blocks: smallest=50 largest=50
+mem stats: after allocation: 1 size 20: 1 free blocks, 2 used blocks, free blocks: smallest=1048482 largest=1048482, used blocks: smallest=20 largest=50
+mem stats: after allocation: 2 size 20: 1 free blocks, 3 used blocks, free blocks: smallest=1048454 largest=1048454, used blocks: smallest=20 largest=50
+mem stats: after allocation: 3 size 20: 1 free blocks, 4 used blocks, free blocks: smallest=1048426 largest=1048426, used blocks: smallest=20 largest=50
+mem stats: after allocation: 4 size 50: 1 free blocks, 5 used blocks, free blocks: smallest=1048368 largest=1048368, used blocks: smallest=20 largest=50
+mem stats: after free #1: 2 free blocks, 4 used blocks, free blocks: smallest=20 largest=1048368, used blocks: smallest=20 largest=50
+mem stats: after free #3: 3 free blocks, 3 used blocks, free blocks: smallest=20 largest=1048368, used blocks: smallest=20 largest=50
+mem stats: after free #2: 2 free blocks, 2 used blocks, free blocks: smallest=76 largest=1048368, used blocks: smallest=50 largest=50
+mem stats: after free #0: 2 free blocks, 1 used blocks, free blocks: smallest=134 largest=1048368, used blocks: smallest=50 largest=50
+mem stats: after free #4: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
+
 Program Functionality Tests Statistics:
-mem stats: After allocating entire memory pool: 1 free blocks, 5 used blocks, free blocks: smallest=1047028 largest=1047028, used blocks: smallest=100 largest=500
-mem stats: After allocation failure: 1 free blocks, 5 used blocks, free blocks: smallest=1047028 largest=1047028, used blocks: smallest=100 largest=500
-mem stats: After freeing NULL pointer: 1 free blocks, 5 used blocks, free blocks: smallest=1047028 largest=1047028, used blocks: smallest=100 largest=500
-mem stats: After allocating random sizes: 1 free blocks, 8 used blocks, free blocks: smallest=1046771 largest=1046771, used blocks: smallest=57 largest=500
-mem stats: After freeing random sizes: 1 free blocks, 5 used blocks, free blocks: smallest=1047028 largest=1047028, used blocks: smallest=100 largest=500
+mem stats: after allocation failure: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
+mem stats: after freeing NULL pointer: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
+mem stats: after allocating random sizes: 1 free blocks, 3 used blocks, free blocks: smallest=1048226 largest=1048226, used blocks: smallest=68 largest=141
+mem stats: after freeing random sizes: 1 free blocks, 0 used blocks, free blocks: smallest=1048568 largest=1048568, used blocks: smallest=0 largest=0
