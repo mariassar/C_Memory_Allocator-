@@ -1,6 +1,5 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
-.PHONY: clean
 
 # builds the 'main' executable, outputs it to mem.txt file, and displays the output
 all: main
