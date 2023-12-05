@@ -86,17 +86,16 @@ void my_free(void *mem_pointer) {
 
 /*  mem_get_stats goes through every memory block and collects statistics about the current allocation of the memory pool. */
 void mem_get_stats(mem_stats_ptr mem_stats) {
-    /* (int)
     /* setup the variables before collecting stats */
     mem_stats->largest_block_free = 0;               
-    mem_stats->smallest_block_free = pool_size; 
+    mem_stats->smallest_block_free = (int)pool_size; 
     mem_stats->num_blocks_free = 0;                  
     mem_stats->num_blocks_used = 0;                  
     mem_stats->largest_block_used = 0;               
-    mem_stats->smallest_block_used = pool_size; 
+    mem_stats->smallest_block_used = (int)pool_size; 
     
     {
-        unsigned char *temp = pool;                                          /* a pointer to get the pool block by block */
+        unsigned char *temp = pool;                                        /* a pointer to access the pool block by block */
         while (temp - pool < pool_size) {                                  /* while the pointer is within the pool */
             block_header_ptr b = (block_header_ptr)temp;                   /* set temporary pointer to header of the current block */
             int cleanSize = (int)(b->size - sizeof(block_header));         /* get block size (size - header) because main didnt give us the header */
@@ -124,7 +123,7 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
                 default:
                     break;
             }
-            temp += b->size;
+            temp += b->size;                                               /* add block header size to temp pointer */
         }
         /* set the smallest sizes of used and free blocks to 0 if no block was found */
         if (mem_stats->num_blocks_free == 0) {
