@@ -1,24 +1,24 @@
 #include <stdio.h>  
 #include "my_mem.h"
 
-/* declare pointer to the memory pool and its size that is set up by mem_init function */
+/* declaration of a pointer variable to the memory pool and another variable to the pool size that is set up by mem_init function */
 unsigned char *pool = NULL;
 unsigned int pool_size = 0;
 
 /* the memory to be managed is passed into this function */
-/* mem_init saves the pointer to memory and initializes the size and status of a given block */
+/* mem_init initializes a memory pool, saves the pointer to that pool in the global variable pool, and initializes the size and status of a given block */
 void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     /* save the provided memory block into global variables */
-    pool = my_memory;                                                         /* holds the pointer to the memory pool's pointer ( my_memory -> global memory -> malloc() ) */
-    pool_size = my_mem_size;                                                  /* holds the pointer to the memory pool's size */
-    if (pool != NULL) {                                                       /* if we got a valid pool(array/linked list) */
+    pool = my_memory;                                                         /* pool - holds the pointer to the memory pool's pointer ( my_memory -> global memory -> malloc() ) */
+    pool_size = my_mem_size;                                                  /* pool_size - holds the pointer to the memory pool's size */
+    if (pool != NULL) {                                                       /* if we got a valid pool */
         block_header_ptr first = (block_header_ptr)pool;
-        first->size = my_mem_size;                                            /* take the structure's initial size and set the block to memory pool's full size */
+        first->size = my_mem_size;                                            /* take the structure's initial size and set the block to the memory pool's full size */
         first->status = FREE_BLOCK;                                           /* take the structure's initial status and set the block to free */ 
     }
 }
 
-/* simulates c library malloc() , but allocates it from the memory pool passed to mem_init() */
+/* my_malloc simulates c library malloc() , but allocates it from the memory pool passed to mem_init() */
 void *my_malloc(unsigned size) {
     unsigned char *temp = pool;                                              /* get to the beginning of the memory pool */
     unsigned int needSize = size + sizeof(block_header);                     /* look for the size needed, meaning the header plus the size of the block given by main */
@@ -45,7 +45,7 @@ void *my_malloc(unsigned size) {
     return temp + sizeof(block_header);                                     /* return a pointer to the memory after the header */
 }
 
-/* simulates c library free(), but returns the memory to the pool passed to mem_init() */
+/* my_free simulates c library free(), but returns the memory to the pool passed to mem_init() */
 void my_free(void *mem_pointer) {
     /* variables to walk through the memory headers */
     unsigned char *prev=NULL;                                               /* previous header */
@@ -84,15 +84,16 @@ void my_free(void *mem_pointer) {
 }
 
 
-/* the function goes through every memory block and collects statistics about the current allocation of the memory pool. */
+/*  mem_get_stats goes through every memory block and collects statistics about the current allocation of the memory pool. */
 void mem_get_stats(mem_stats_ptr mem_stats) {
+    /* (int)
     /* setup the variables before collecting stats */
     mem_stats->largest_block_free = 0;               
-    mem_stats->smallest_block_free = (int)pool_size; 
+    mem_stats->smallest_block_free = pool_size; 
     mem_stats->num_blocks_free = 0;                  
     mem_stats->num_blocks_used = 0;                  
     mem_stats->largest_block_used = 0;               
-    mem_stats->smallest_block_used = (int)pool_size; 
+    mem_stats->smallest_block_used = pool_size; 
     
     {
         unsigned char *temp = pool;                                          /* a pointer to get the pool block by block */
@@ -135,7 +136,7 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
     }
 }
 
- /* function to print stats collected */
+ /* print_stats print's stats collected by mem_get_stats */
 void print_stats(char *prefix) {
     mem_stats_struct mem_stats;
     /* calls function to get stats to be printed */
