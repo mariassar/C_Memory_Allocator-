@@ -3,8 +3,8 @@ CFLAGS = -Wall -Wextra
 
 # builds the 'main' executable, outputs it to mem.txt file, and displays the output
 all: main
-     ./main > mem.txt
-     ./main 
+	./main > mem.txt
+	./main 
 
 # compiles the 'main' executable by linking the object files
 main: main.o my_mem.o test_cases.o
@@ -24,4 +24,3 @@ test_cases.o: test_cases.c my_mem.h test_cases.h
 
 clean:
 	rm -f *.o main mem.txt
-
