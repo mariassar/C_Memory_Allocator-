@@ -1,7 +1,7 @@
 #include <stdio.h>  
 #include "my_mem.h"
 
-/* pointer to the memory pool and its size that is setup by mem_init function */
+/* declare pointer to the memory pool and its size that is set up by mem_init function */
 unsigned char *pool = NULL;
 unsigned int pool_size = 0;
 
@@ -18,10 +18,10 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
     }
 }
 
-/* a function functionally equivalent to malloc() , but allocates it from the memory pool passed to mem_init() */
+/* simulates c library malloc() , but allocates it from the memory pool passed to mem_init() */
 void *my_malloc(unsigned size) {
     unsigned char *temp = pool;                                              /* get to the beginning of the memory pool */
-    unsigned int needSize = size + sizeof(block_header);                     /* look for the size needed meaning the header plus the size of the block given by main */
+    unsigned int needSize = size + sizeof(block_header);                     /* look for the size needed, meaning the header plus the size of the block given by main */
     block_header_ptr b = (block_header_ptr)temp;                             /* set on the first header at the beginning of the pool */
     while (temp - pool < pool_size) {                                        /* temp pointer should not run beyond the pool size */
         if (b->status == FREE_BLOCK && b->size >= needSize) {
@@ -41,11 +41,11 @@ void *my_malloc(unsigned size) {
         split_block->status = FREE_BLOCK;                                   /* mark this new block as free */
         b->size = needSize;                                                 /* update the size of the allocated block, to set where the new free block begins */
     }
-                                                                            /* if the size of the block is exactly how much free scpace is left, no need to split, just return it */
+                                                                            /* if the size of the block is exactly how much free space is left, there is no need to split, just return it */
     return temp + sizeof(block_header);                                     /* return a pointer to the memory after the header */
 }
 
-/* a function equivalent to free(), but returns the memory to the pool passed to mem_init() */
+/* simulates c library free(), but returns the memory to the pool passed to mem_init() */
 void my_free(void *mem_pointer) {
     /* variables to walk through the memory headers */
     unsigned char *prev=NULL;                                               /* previous header */
@@ -56,13 +56,13 @@ void my_free(void *mem_pointer) {
     block_header_ptr b = (block_header_ptr)cur;
 
     /* try to locate the needed pointer in the chain of memory blocks */
-    /* start from the first block (pool poitner) and increment by the block size */
+    /* start from the first block (pool pointer) and increment by the block size */
     while (cur - pool < pool_size && cur < need) {                          /* loop until we run beyond the memory pool or the needed pointer is found */
         prev = cur;                                                         /* set the pointer(prev) to the previous block(cur) */
         cur += b->size;                                                     /* increment the current header to the next block */
         b = (block_header_ptr)cur;                                          /* create a pointer to the block header */
     }
-    /* if we locate the memory successfully then the current header should be exatly equal to the need pointer */
+    /* if we locate the memory successfully, then the current header should be exactly equal to the needed pointer */
     if (cur == need) {                                                      /* if we found the block we need */
         unsigned char *next=cur + b->size;                                  /* obtain the pointer to the next block */
         b->status = FREE_BLOCK;                                             /* mark the block as free */
@@ -98,26 +98,26 @@ void mem_get_stats(mem_stats_ptr mem_stats) {
         unsigned char *temp = pool;                                          /* a pointer to get the pool block by block */
         while (temp - pool < pool_size) {                                  /* while the pointer is within the pool */
             block_header_ptr b = (block_header_ptr)temp;                   /* set temporary pointer to header of the current block */
-            int cleanSize = (int)(b->size - sizeof(block_header));         /* get block size (size - header) becuase main didnt give us the header */
+            int cleanSize = (int)(b->size - sizeof(block_header));         /* get block size (size - header) because main didnt give us the header */
             switch (b->status) {                                           /* check the block status */
                 case FREE_BLOCK:
                 /* update free block stats */
                     mem_stats->num_blocks_free++;                          /* add one to how many blocks are free */
                     if (cleanSize > mem_stats->largest_block_free) {       /* if the clean size of the block is greater than the largest free block */
-                        mem_stats->largest_block_free = cleanSize;         /* set the largest free block eqaul to the clean size */
+                        mem_stats->largest_block_free = cleanSize;         /* set the largest free block equal to the clean size */
                     }
                     if (cleanSize < mem_stats->smallest_block_free) {      /* if the clean size of the block is less than the smallest free block */
-                        mem_stats->smallest_block_free = cleanSize;        /* set the smallest free block eqaul to the clean size */
+                        mem_stats->smallest_block_free = cleanSize;        /* set the smallest free block equal to the clean size */
                     }
                     break;
                 /* update used block stats */
                 case USED_BLOCK:
                     mem_stats->num_blocks_used++;                          /* add one to how many blocks are used */
                     if (cleanSize > mem_stats->largest_block_used) {       /* if the clean size of the block is greater than the largest used block */
-                        mem_stats->largest_block_used = cleanSize;         /* set the largest used block eqaul to the clean size */
+                        mem_stats->largest_block_used = cleanSize;         /* set the largest used block equal to the clean size */
                     }
                     if (cleanSize < mem_stats->smallest_block_used) {      /* if the clean size of the block is less than the smallest used block */
-                        mem_stats->smallest_block_used = cleanSize;        /* set the smallest used block eqaul to the clean size */
+                        mem_stats->smallest_block_used = cleanSize;        /* set the smallest used block equal to the clean size */
                     }
                     break;
                 default:
