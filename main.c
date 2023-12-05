@@ -8,8 +8,6 @@ int main() {
     unsigned int global_mem_size = 1024 * 1024;                 /* set the size of the global memory pool in bytes (1MB) */
     unsigned char *global_memory = malloc(global_mem_size);     /* grabs memory from malloc */
 
-    /* error message enhances the maintainability and reliability of code and 
-    helps in diagnosing issues during development, testing, and production use.*/
     if (!global_memory) {
         perror("Memory allocation error");                      /* print an error message if memory allocation fails */
         exit(1);                                                /* exit the program with an error status */
@@ -18,8 +16,8 @@ int main() {
     printf("Main Sample Program Statistics:\n");   
     /* initial statistics */
     /* call mem_int on memory that was just grabbed */
-    mem_init(global_memory, global_mem_size);                   /* initialize the memory manager with the global memory pool */
-    /* dump initial statistic with a prefix of "after initializaton" */ 
+    mem_init(global_memory, global_mem_size);                   /* initialize the memory allocator with the global memory pool */
+    /* display initial statistic with a prefix of "after initialization" */ 
     print_stats("after initialization");     
 
     /* allocate and free blocks */
@@ -53,7 +51,7 @@ int main() {
     }
 
     printf("\nProgram Functionality Tests Statistics:\n"); 
-    /* run various test functions to test reliability and functionality of the allocator */
+    /* run various test functions to test the reliability and functionality of the allocator */
     test_mem_init(global_memory, global_mem_size);
     test_allocate_more_than_available_memory(global_mem_size);
     test_free_null_pointer();
