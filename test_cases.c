@@ -5,9 +5,14 @@
 #include "my_mem.h"
 #include "test_cases.h"
 
-/* function to test allocating entire memory pool */
-void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size) {
+/* Setup function to initialize the memory pool before each test */
+void setup() {
     mem_init(global_memory, global_mem_size);
+}
+
+/* function to test allocating entire memory pool */
+void test_mem_init() {
+    setup();  /* Call the setup function to initialize the memory pool */
     mem_stats_struct stats;  /* Declare the stats variable to retrieve memory statistics */
     mem_get_stats(&stats);
     assert(stats.num_blocks_free == 1);                     /* One initial free block */
@@ -18,14 +23,17 @@ void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size) {
 }
 
 /* function to test allocating more memory than available */
-void test_allocate_more_than_available_memory(unsigned int global_mem_size) {
-     /* try to allocate a memory block larger than the available memory */
+void test_allocate_more_than_available_memory() {
+    setup();  /* Call the setup function to initialize the memory pool */
+    /* try to allocate a memory block larger than the available memory */
     unsigned char *ptr6 = my_malloc(global_mem_size + 100);
     assert(ptr6 == NULL);  /* allocation should fail */
     print_stats("after allocation failure");
 }
+
 /* function to test freeing a NULL pointer */
 void test_free_null_pointer() {
+    setup();  /* Call the setup function to initialize the memory pool */
     /* free a NULL pointer (should not cause any issues) */
     my_free(NULL); 
     print_stats("after freeing NULL pointer");
@@ -33,10 +41,9 @@ void test_free_null_pointer() {
 
 /* function to test allocating and freeing random-sized memory blocks */
 void test_allocate_free_random_sizes() {
+    setup();  /* Call the setup function to initialize the memory pool */
     /* seed the random number generator */
     srand(time(NULL));
-    /* Initialize the memory pool before the test */
-    mem_init(global_memory, global_mem_size);
     
     /* declare an array to store pointers to allocated memory blocks */
     unsigned char *ptr_array[3];
