@@ -33,9 +33,11 @@ void test_free_null_pointer() {
 
 /* function to test allocating and freeing random-sized memory blocks */
 void test_allocate_free_random_sizes() {
-    // seed the random number generator
+    /* seed the random number generator */
     srand(time(NULL));
-
+    /* Initialize the memory pool before the test */
+    mem_init(global_memory, global_mem_size);
+    
     /* declare an array to store pointers to allocated memory blocks */
     unsigned char *ptr_array[3];
     /* declare an array to store sizes of memory blocks */
