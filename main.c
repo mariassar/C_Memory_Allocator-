@@ -58,7 +58,7 @@ int main() {
     test_allocate_free_random_sizes();  
     
     /* free global memory to ensure that any memory allocated during execution is
-     properly released and returned to the system, preventing memory leaks */
+     properly released, preventing memory leaks */
     free(global_memory);
 
     return 0;   
