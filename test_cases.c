@@ -71,4 +71,9 @@ void test_allocate_free_random_sizes() {
     }
 
     print_stats("after freeing random sizes");
+    
+    /* Free allocated memory at the end of the test */
+    for (int i = 0; i < 3; i++) {
+        my_free(ptr_array[i]);
+    }
 }
