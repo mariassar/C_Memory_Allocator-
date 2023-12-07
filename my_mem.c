@@ -21,10 +21,10 @@ void mem_init(unsigned char *my_memory, unsigned int my_mem_size) {
 /* my_malloc simulates c library malloc() , but allocates it from the memory pool passed to mem_init() */
 void *my_malloc(unsigned size) {
     unsigned char *temp = pool;                                              /* get to the beginning of the memory pool */
-    unsigned int needSize = size + sizeof(block_header);                     /* look for the size needed, meaning the header plus the size of the block given by main */
+    unsigned int needSize = size + sizeof(block_header);                     /* look for the size needed, meaning the block header(8 bytes) plus the size of the block given by main (ex1: 50) */
     block_header_ptr b = (block_header_ptr)temp;                             /* set on the first header at the beginning of the pool */
     while (temp - pool < pool_size) {                                        /* temp pointer should not run beyond the pool size */
-        if (b->status == FREE_BLOCK && b->size >= needSize) {
+        if (b->status == FREE_BLOCK && b->size >= needSize) {                /* total bytes >= 58 */
             break;                                                           /* break as soon as a free block of the necessary size found "first fit strategy " */
         }
         temp += b->size;                                                     /* increment temp pointer by the block size, this should land it to the next block header */
