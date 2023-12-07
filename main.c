@@ -31,7 +31,7 @@ int main() {
             /* call malloc for all sizes in array */
             /* stash pointers that come back */
             ptr_array[i] = my_malloc(sizes[i]);                
-            sprintf(buf, "after allocation: %d size %d", i, sizes[i]);  
+            sprintf(buf, "after iteration: %d size %d", i, sizes[i]);  
             /* print statistic after every allocation */
             print_stats(buf);                                 
         }
