@@ -4,7 +4,6 @@
 /* decleration of test funtions */
 void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size);
 void test_allocate_more_than_available_memory(unsigned int global_mem_size);
-void test_free_null_pointer();
 void test_allocate_free_random_sizes();
 
 #endif
