@@ -53,9 +53,9 @@ int main() {
     printf("\nProgram Functionality Tests Statistics:\n"); 
     /* run various test functions to test the reliability and functionality of the allocator */
     test_mem_init(global_memory, global_mem_size);
-    test_allocate_more_than_available_memory(global_memory, global_mem_size));
-    test_free_null_pointer();
-    test_allocate_free_random_sizes();  
+    test_allocate_more_than_available_memory(global_memory, global_mem_size);
+    test_free_null_pointer(global_memory, global_mem_size);
+    test_allocate_free_random_sizes(global_memory, global_mem_size);  
     
     /* free global memory to ensure that any memory allocated during execution is
      properly released, preventing memory leaks */
