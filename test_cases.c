@@ -5,16 +5,13 @@
 #include "my_mem.h"
 #include "test_cases.h"
 
-/* Setup function to initialize the memory pool before each test */
-void setup() {
-    mem_init(global_memory, global_mem_size);
-}
-
 /* function to test allocating entire memory pool */
 void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size) {
-    setup();  /* Call the setup function to initialize the memory pool */
+    mem_init(memory_pool, mem_size); /*initialize the memory pool */
+    
     mem_stats_struct stats;  /* Declare the stats variable to retrieve memory statistics */
     mem_get_stats(&stats);
+    
     assert(stats.num_blocks_free == 1);                     /* One initial free block */
     assert(stats.num_blocks_used == 0);                     /* No blocks used */
     assert(stats.num_blocks_free == 1);                     /* One free block */
@@ -23,25 +20,30 @@ void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size) {
 }
 
 /* function to test allocating more memory than available */
-void test_allocate_more_than_available_memory(unsigned int global_mem_size) {
-    setup();  /* Call the setup function to initialize the memory pool */
+void test_allocate_more_than_available_memory(unsigned char *memory_pool, unsigned int mem_size) {
+    mem_init(memory_pool, mem_size);
+    
     /* try to allocate a memory block larger than the available memory */
     unsigned char *ptr6 = my_malloc(global_mem_size + 100);
     assert(ptr6 == NULL);  /* allocation should fail */
     print_stats("after allocation failure");
+
+    free(memory_pool);
 }
 
 /* function to test freeing a NULL pointer */
-void test_free_null_pointer() {
-    setup();  /* Call the setup function to initialize the memory pool */
+void test_free_null_pointer(unsigned char *memory_pool, unsigned int mem_size) {
+    mem_init(memory_pool, 100);
     /* free a NULL pointer (should not cause any issues) */
     my_free(NULL); 
     print_stats("after freeing NULL pointer");
+
+    free(memory_pool);
 }
 
 /* function to test allocating and freeing random-sized memory blocks */
-void test_allocate_free_random_sizes() {
-    setup();  /* Call the setup function to initialize the memory pool */
+void test_allocate_free_random_sizes(unsigned char *memory_pool, unsigned int mem_size) {
+    mem_init(memory_pool, mem_size); /* initialize the memory pool */
     /* seed the random number generator */
     srand(time(NULL));
     
@@ -71,4 +73,9 @@ void test_allocate_free_random_sizes() {
     }
 
     print_stats("after freeing random sizes");
+
+    free(memory_pool);
 }
+
+
+
