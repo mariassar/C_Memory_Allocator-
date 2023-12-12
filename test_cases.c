@@ -33,7 +33,7 @@ void test_allocate_more_than_available_memory(unsigned char *memory_pool, unsign
 
 /* function to test freeing a NULL pointer */
 void test_free_null_pointer(unsigned char *memory_pool, unsigned int mem_size) {
-    mem_init(memory_pool, 100);
+    mem_init(memory_pool, mem_size);
     /* free a NULL pointer (should not cause any issues) */
     my_free(NULL); 
     print_stats("after freeing NULL pointer");
