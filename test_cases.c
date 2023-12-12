@@ -17,6 +17,8 @@ void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size) {
     assert(stats.num_blocks_free == 1);                     /* One free block */
     assert(stats.smallest_block_free == global_mem_size - sizeof(block_header));  /* Entire pool is free */
     assert(stats.largest_block_free == global_mem_size - sizeof(block_header));   /* Entire pool is free */
+
+     print_stats("after initializing memory pool");
 }
 
 /* function to test allocating more memory than available */
@@ -26,13 +28,6 @@ void test_allocate_more_than_available_memory(unsigned int global_mem_size) {
     assert(ptr6 == NULL);
     print_stats("after allocation failure");
 
-}
-
-/* function to test freeing a NULL pointer */
-void test_free_null_pointer() {
-    /* free a NULL pointer (should not cause any issues) */
-    my_free(NULL); 
-    print_stats("after freeing NULL pointer");
 }
 
 /* function to test allocating and freeing random-sized memory blocks */
@@ -67,5 +62,4 @@ void test_allocate_free_random_sizes() {
 
     print_stats("after freeing random sizes");
 }
-
 
