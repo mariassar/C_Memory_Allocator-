@@ -11,7 +11,7 @@ void setup() {
 }
 
 /* function to test allocating entire memory pool */
-void test_mem_init() {
+void test_mem_init(unsigned char *global_memory, unsigned int global_mem_size) {
     setup();  /* Call the setup function to initialize the memory pool */
     mem_stats_struct stats;  /* Declare the stats variable to retrieve memory statistics */
     mem_get_stats(&stats);
@@ -23,7 +23,7 @@ void test_mem_init() {
 }
 
 /* function to test allocating more memory than available */
-void test_allocate_more_than_available_memory() {
+void test_allocate_more_than_available_memory(unsigned int global_mem_size) {
     setup();  /* Call the setup function to initialize the memory pool */
     /* try to allocate a memory block larger than the available memory */
     unsigned char *ptr6 = my_malloc(global_mem_size + 100);
