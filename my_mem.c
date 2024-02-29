@@ -23,7 +23,7 @@ void *my_malloc(unsigned size) {
     unsigned char *temp = pool;                                              /* get to the beginning of the memory pool */
     unsigned int needSize = size + sizeof(block_header);                     /* look for the size needed, meaning the block header(8 bytes) plus the size of the block given by main (ex1: 50) */
     block_header_ptr b = (block_header_ptr)temp;                             /* set on the first header at the beginning of the pool */
-    while (temp - pool < pool_size) {                                        /* temp pointer should not run beyond the pool size */
+    while (temp - pool < pool_size) {                                        /* temp pointer - pool size should not run beyond the pool size */
         if (b->status == FREE_BLOCK && b->size >= needSize) {                /* total bytes >= 58 */
             break;                                                           /* break as soon as a free block of the necessary size found "first fit strategy " */
         }
@@ -35,7 +35,7 @@ void *my_malloc(unsigned size) {
     }
     /* free block is located */
     b->status = USED_BLOCK;                                                 /* make the block as used */
-    if (needSize + sizeof(block_header) < b->size) {                        /* if the block is larger than the needSize + header for the new block, split the excess into the next free block */
+    if (needSize + sizeof(block_header) < b->size) {                        /* if the free block is larger than the needSize + header for the new block, split the excess into the next free block */
         block_header_ptr split_block = (block_header_ptr)(temp + needSize); /* set a pointer to where the new block header will start */
         split_block->size =  b->size - needSize;                            /* set the size of the split block to the difference */
         split_block->status = FREE_BLOCK;                                   /* mark this new block as free */
