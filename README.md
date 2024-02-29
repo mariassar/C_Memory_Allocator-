@@ -22,7 +22,7 @@ The core allocator implementation is based on two main functions: `my_malloc()` 
 
 `my_malloc()` Functions equivalent to `malloc()`, but allocates memory from the initialized memory pool. This function searches for a free memory block of the required size in the memory pool (using a "first fit" strategy). If found, it allocates the block and returns a pointer to the memory region after the block header. If the block is larger than the requested size, it splits the block into two parts, one for the allocation and the other for the remaining free space.
 
-`my_free()` Functions equivalent to free, but returns memory to the memory pool passed to `mem_init()`. This function takes a pointer to a memory region and extracts the block header pointer. It then marks the corresponding block as free and if adjacent blocks are also free, it merges them to create larger free blocks.
+`my_free()` Functions equivalent to free, but returns memory to the memory pool passed to `mem_init()`. This function takes a pointer to a memory region and marks the corresponding block as free and if adjacent blocks are also free, it merges them to create larger free blocks.
 
 `mem_get_stats()` Collects statistics about the current memory allocation in the memory pool. This function traverses all memory blocks and calculates the number of free and used blocks. It also determines the sizes of the smallest and largest free/used blocks. Additionally, it updates the provided `mem_stats_ptr` structure with the collected statistics.
 
